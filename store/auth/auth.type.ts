@@ -1,0 +1,3 @@
+export const SET_LOGIN = 'SET_LOGIN';
+export const SET_LOGIN_USER = 'SET_LOGIN_USER'
+export const SET_PROCCESING = "SET_PROCCESING"

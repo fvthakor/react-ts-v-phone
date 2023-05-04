@@ -1,4 +1,4 @@
-import Profile from "../sidebar/Profile";
+import Profile from "./sidebar/Profile";
 
 const MobileHeader = () => {
     return(

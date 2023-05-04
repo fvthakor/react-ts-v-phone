@@ -1,13 +1,29 @@
 import { useEffect, useRef, useState } from "react"
 import OutsideClick from "./OutSideHook";
+import { Dispatch } from "redux";
+import { useDispatch } from "react-redux";
+import { logout } from "@/store/auth/auth.action";
+import { useSelector } from "react-redux";
+import { RootStateModel } from "@/models";
+import { useRouter } from "next/router";
 
 const Profile = () => {
+    //const { isLogin } = useSelector((state:RootStateModel) => state.auth)
+    const router = useRouter();
+
     const [openProfile , setOpenProfile] = useState(false)
     const boxRef = useRef(null);
     const boxOutsideClick = OutsideClick(boxRef); 
     
+    const dispatch:Dispatch<any> = useDispatch();
+
     const toggleProfile = () => {
         setOpenProfile(openProfile ? false : true)
+    }
+
+    const userLogout = () => {
+        router.push('/login');
+        dispatch(logout())
     }
 
     useEffect(() => {
@@ -15,12 +31,13 @@ const Profile = () => {
             setOpenProfile(false)
         }
     }, [boxOutsideClick])
+    // useEffect(() => {
 
+    // }, [])
     return(
         <>
             <div className="relative flex items-center flex-shrink-0 p-2">
                 <button
-                  ref={boxRef}
                   onClick={() => toggleProfile()}
                   className="transition-opacity rounded-lg opacity-80 hover:opacity-100 focus:outline-none focus:ring focus:ring-indigo-600 focus:ring-offset-white focus:ring-offset-2"
                 >
@@ -32,16 +49,16 @@ const Profile = () => {
                   <span className="sr-only">User menu</span>
                 </button>
                 { openProfile ? <>
-                    <div className="absolute w-48 py-1 mt-2 origin-bottom-left bg-white rounded-md shadow-lg left-10 bottom-14 focus:outline-none"
+                    <div ref={boxRef} className="absolute w-48 py-1 mt-2 sm:origin-bottom-left bg-white rounded-md shadow-lg -left-[8.5rem] top-[70px] sm:top-auto sm:left-10 sm:bottom-14 focus:outline-none"
                     role="menu"
                     aria-orientation="vertical"
                     aria-label="user menu">
-                        <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem"
+                        {/* <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem"
                         >Your Profile</a>
 
-                        <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Settings</a>
+                        <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Settings</a> */}
 
-                        <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Sign out</a>
+                        <a onClick={() => userLogout()} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer" role="menuitem">Sign out</a>
                     </div>
                 </> : <></>}
                     
