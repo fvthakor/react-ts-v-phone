@@ -21,3 +21,35 @@
 body {
   color: rgb(var(--foreground-rgb));
 }
+
+
+.right_chat{
+  position:relative;
+}
+
+.right_chat:before {
+  content: '';
+  @apply absolute visible top-0 -right-[10px] border-[10px] border-solid border-transparent border-t-white;
+}
+
+.right_chat::after {
+  content: '';
+  @apply absolute visible top-0 -right-[8px] border-[10px] border-solid border-transparent border-t-white clear-both;
+}
+
+
+
+.left_chat{
+  position:relative;
+}
+
+.left_chat:before {
+  content: '';
+
+  @apply absolute visible top-0 -left-[10px] border-[10px] border-solid border-transparent border-t-[10px] border-t-white;
+}
+
+.left_chat::after {
+  content: '';
+  @apply absolute visible top-0 -left-[8px] border-[10px] border-solid border-transparent border-t-[10px] border-t-white clear-both;
+}

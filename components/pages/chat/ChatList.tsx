@@ -6,44 +6,44 @@ const ChatList = () => {
             id: 1, 
             name: 'Mia John',
             follower: "11.2",
-            image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=faceare&facepad=3&w=688&h=688&q=100"
+            image: "https://i.pravatar.cc/300"
         },
         {
             id: 2, 
             name: 'Mia John 2',
             follower: "11.2",
-            image: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&h=880&q=80"
+            image: "https://i.pravatar.cc/300"
         },
         {
             id: 3, 
             name: 'Mia John 3',
             follower: "11.2",
-            image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&h=687&q=80"
+            image: "https://i.pravatar.cc/300"
         },
         {
             id: 4, 
             name: 'Mia John 4',
             follower: "11.2",
-            image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=faceare&facepad=3&w=688&h=688&q=100"
+            image: "https://i.pravatar.cc/300"
         },
         {
             id: 5, 
             name: 'Mia John 5',
             follower: "11.2",
-            image: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&h=880&q=80"
+            image: "https://i.pravatar.cc/300"
         },
         {
             id: 6, 
             name: 'Mia John 6',
             follower: "11.2",
-            image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&h=687&q=80"
+            image: "https://i.pravatar.cc/300"
         }
     ]
     
     return(
         <div className="bg-white rounded-md border">
                 <div className="bg-white border-l border-r sm:w-64 dark:bg-gray-900 dark:border-gray-700 h-screen">
-                    <div className="h-full flex flex-col gap-2 mt-28 sm:mt-0 overflow-y-auto">
+                    <div className="h-full flex flex-col gap-2 mt-28 sm:mt-0 overflow-y-auto pb-32 sm:pb-0">
                         {chats.map(chat => (
                             <ChatCard key={chat.id} chat={chat} />
                         ))}

@@ -1,9 +1,12 @@
+import ChatBody from "@/components/pages/chat/ChatBody";
 import ChatLayout from "@/components/pages/chat/ChatLayout";
 
 const Chatbody = () => {
     return(
         <ChatLayout>
-            <h1>fdsfsfs</h1>
+            <div className="w-full h-full p-1">
+                <ChatBody />
+            </div>
         </ChatLayout>
     )
 }

@@ -4,6 +4,7 @@ import NotificationIcon from "../../icons/NotificationIcon";
 import Logo from "./Logo";
 import MenuButton from "./Menubutton";
 import Profile from "./Profile";
+import Company from "@/components/pages/company/Company";
 export interface SidebarInterFace{
   onClick?: any
 }
@@ -13,7 +14,6 @@ function Sidebar(props:SidebarInterFace){
       {route: '/chat', title: 'Toggle message panel', tabName: 'messageTab', content: <MessageIcon className="w-6 h-6" />},
       {route: '/notification', title: 'Toggle notifications panel', tabName: 'notificationTab', content: <NotificationIcon className="w-6 h-6" />}
     ]
-    
     return(
         <>
             <nav
@@ -27,6 +27,7 @@ function Sidebar(props:SidebarInterFace){
                 </div>
                 <Profile />
             </nav>
+           <Company />
         </>
     );
 }

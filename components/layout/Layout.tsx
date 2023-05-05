@@ -16,7 +16,7 @@ function Layout({ children }: LayoutProps) {
     if(successMessage && successMessage !== ''){
         toast.success(successMessage,{
             theme: 'colored',
-            autoClose: 3000,
+            autoClose: 2000,
         })
     }
 }, [successMessage])
