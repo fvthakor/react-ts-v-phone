@@ -1,70 +1,61 @@
-import { useEffect, useRef, useState } from "react"
-import OutsideClick from "./OutSideHook";
+import { Fragment } from "react"
 import { Dispatch } from "redux";
 import { useDispatch } from "react-redux";
 import { logout } from "@/store/auth/auth.action";
-import { useSelector } from "react-redux";
-import { RootStateModel } from "@/models";
 import { useRouter } from "next/router";
+import { Menu, Transition } from "@headlessui/react";
+import {PowerIcon, UserIcon } from "@heroicons/react/20/solid";
 
 const Profile = () => {
-    //const { isLogin } = useSelector((state:RootStateModel) => state.auth)
     const router = useRouter();
-
-    const [openProfile , setOpenProfile] = useState(false)
-    const boxRef = useRef(null);
-    const boxOutsideClick = OutsideClick(boxRef); 
     
     const dispatch:Dispatch<any> = useDispatch();
-
-    const toggleProfile = () => {
-        setOpenProfile(openProfile ? false : true)
-    }
 
     const userLogout = () => {
         router.push('/login');
         dispatch(logout())
     }
 
-    useEffect(() => {
-        if(boxOutsideClick){
-            setOpenProfile(false)
-        }
-    }, [boxOutsideClick])
-    // useEffect(() => {
-
-    // }, [])
     return(
         <>
-            <div className="relative flex items-center flex-shrink-0 p-2">
-                <button
-                  onClick={() => toggleProfile()}
-                  className="transition-opacity rounded-lg opacity-80 hover:opacity-100 focus:outline-none focus:ring focus:ring-indigo-600 focus:ring-offset-white focus:ring-offset-2"
-                >
-                  <img
-                    className="w-10 h-10 rounded-lg shadow-md"
-                    src="https://avatars.githubusercontent.com/u/57622665?s=460&u=8f581f4c4acd4c18c33a87b3e6476112325e8b38&v=4"
-                    alt="Ahmed Kamel"
-                  />
-                  <span className="sr-only">User menu</span>
-                </button>
-                { openProfile ? <>
-                    <div ref={boxRef} className="absolute w-48 py-1 mt-2 sm:origin-bottom-left bg-white rounded-md shadow-lg -left-[8.5rem] top-[70px] sm:top-auto sm:left-10 sm:bottom-14 focus:outline-none"
-                    role="menu"
-                    aria-orientation="vertical"
-                    aria-label="user menu">
-                        {/* <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem"
-                        >Your Profile</a>
-
-                        <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Settings</a> */}
-
-                        <a onClick={() => userLogout()} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer" role="menuitem">Sign out</a>
-                    </div>
-                </> : <></>}
+            <Menu as="div" className="relative flex items-center flex-shrink-0 p-2">
+                <div>
+                    <Menu.Button className="transition-opacity rounded-lg opacity-80 hover:opacity-100 focus:outline-none focus:ring focus:ring-indigo-800 ring ring-indigo-600 focus:ring-offset-white focus:ring-offset-2">
+                    <UserIcon className="w-8 h-8" />
+                    <span className="sr-only">User menu</span>
                     
-              </div>
+                    </Menu.Button>
+                </div>
+                <Transition
+                    as={Fragment}
+                    enter="transition ease-out duration-100"
+                    enterFrom="transform opacity-0 scale-95"
+                    enterTo="transform opacity-100 scale-100"
+                    leave="transition ease-in duration-75"
+                    leaveFrom="transform opacity-100 scale-100"
+                    leaveTo="transform opacity-0 scale-95"
+                    >
+                        <Menu.Items className="absolute right-0 sm:right-auto top-16 sm:-top-10 left-auto sm:left-8  mt-2 w-auto origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none whitespace-nowrap z-[100]">
+                            <div className="px-1 py-1 ">
+                            <Menu.Item>
+                            {({ active }) => (
+                            <button
+                                className={`${
+                                active ? 'bg-indigo-600 text-white' : 'text-gray-900'
+                                } group flex place-content-center w-full items-center rounded-md px-2 py-2 text-sm z-[100]`}
+                                onClick={() => userLogout()} >
+                                <PowerIcon  className="w-4 h-4 mr-2" />
+                                Sign out
+                            </button>
+                            )}
+                        </Menu.Item>
+                            </div>
+                        </Menu.Items>
+                </Transition>
+            </Menu>
         </>
     )
 }
 
 export default Profile;
+  

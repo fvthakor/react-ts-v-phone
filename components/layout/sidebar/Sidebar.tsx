@@ -1,3 +1,5 @@
+
+import { UserIcon, UsersIcon } from "@heroicons/react/20/solid";
 import MenuIcon from "../../icons/MenuIcon";
 import MessageIcon from "../../icons/MessageIcon";
 import NotificationIcon from "../../icons/NotificationIcon";
@@ -11,14 +13,15 @@ export interface SidebarInterFace{
 function Sidebar(props:SidebarInterFace){
     const menus = [
       {route: '/dashboard', title: 'Toggle sidebar', tabName: 'linkTab', content: <MenuIcon className="w-6 h-6" />},
+      {route: '/user', title: 'Toggle notifications panel', tabName: 'userTab', content: <UsersIcon className="w-6 h-6" />},
       {route: '/chat', title: 'Toggle message panel', tabName: 'messageTab', content: <MessageIcon className="w-6 h-6" />},
-      {route: '/notification', title: 'Toggle notifications panel', tabName: 'notificationTab', content: <NotificationIcon className="w-6 h-6" />}
+      {route: '/notification', title: 'Toggle notifications panel', tabName: 'notificationTab', content: <NotificationIcon className="w-6 h-6" />},
     ]
     return(
         <>
             <nav
               aria-label="Options"
-              className="z-20 place-content-between sm:flex-col items-center sm:flex-shrink-0 sm:w-16 w-full sm:h-screen py-4 bg-white border-r-2 border-indigo-100 shadow-md sm:flex flex gap-4 fixed sm:sticky">
+              className="place-content-between sm:flex-col items-center sm:flex-shrink-0 sm:w-16 w-full sm:h-screen py-4 bg-white border-r-2 border-indigo-100 shadow-md sm:flex flex gap-4 fixed sm:sticky z-[51]">
                 <Logo />
                 <div className="flex flex-row sm:flex-col items-center flex-1 p-2 gap-5">
                   {menus.map(menu => (

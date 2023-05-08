@@ -1,41 +1,21 @@
 import RTButton from "@/components/shared/button/RTButton";
 import RTInput from "@/components/shared/input/RTInput";
-import { RootStateModel } from "@/models";
-import { login } from "@/store/auth/auth.action";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
-import { Dispatch } from "redux";
+import { useState } from "react";
 
-const Login = () => {
-    const { isLogin, processing } = useSelector((state:RootStateModel) => state.auth)
+const Register = () => {
+    const [processing, setProcessing] = useState(false)
     const router = useRouter()
-    const dispatch:Dispatch<any> = useDispatch()
-    //functions 
-    //login function 
-    const userLogin = () => {
-        // console.log('login');
-
-        // console.log('isLogin', isLogin);
-        // console.log('processing', processing);
-        dispatch(login({email: 'fvthakor' , password: '123456'}))
+    const userRegister = () => {
+        setProcessing(true);
+        setTimeout(()=> {
+            setProcessing(false);
+            router.push('/login')
+        }, 4000)
     }
-
-
-    useEffect(() => {
-        if(isLogin){
-            router.push('/dashboard');
-        }
-    }, [isLogin])
-    useEffect(() => {
-        // console.log('proccessing',processing);
-        // console.log('isLogin', isLogin)
-    })
-    return (
-        <>
-            <div className="relative flex text-gray-800 antialiased flex-col justify-center overflow-hidden py-6 sm:py-12">
+    return(
+        <div className="relative flex text-gray-800 antialiased flex-col justify-center overflow-hidden py-6 sm:py-12">
                 <div className="relative py-3 sm:w-96 mx-auto text-center">
                     <span className="text-2xl font-light ">Login to your account</span>
                     <div className="mt-4 bg-white shadow-md rounded-lg text-left">
@@ -47,7 +27,7 @@ const Login = () => {
                             <RTInput label="Password" type={'password'}  placeholder="Password"/>
 
                             <div className="flex justify-between items-baseline">
-                                <RTButton name="Login" type={'submit'} className="mt-4 bg-indigo-700 hover:bg-indigo-900" onClick={() => userLogin()} processing={processing} />
+                                <RTButton name="Login" type={'submit'} className="mt-4 bg-indigo-700 hover:bg-indigo-900" onClick={() => userRegister()} processing={processing} />
                                 <a href="#" className="text-sm hover:underline">Forgot password?</a>
                             </div>
                         </div>
@@ -57,8 +37,7 @@ const Login = () => {
                     </div>
                 </div>
             </div>
-        </>
     )
 }
 
-export default Login;
+export default Register;
