@@ -1,30 +1,40 @@
+import ValidateError from "@/components/shared/ValidateError";
 import RTButton from "@/components/shared/button/RTButton";
 import RTInput from "@/components/shared/input/RTInput";
-import { RootStateModel } from "@/models";
+import { LoginModel, RootStateModel } from "@/models";
 import { login } from "@/store/auth/auth.action";
+import { Form, Formik } from "formik";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { Dispatch } from "redux";
+import * as Yup from 'yup';
 
 const Login = () => {
     const { isLogin, processing } = useSelector((state:RootStateModel) => state.auth)
     const router = useRouter()
     const dispatch:Dispatch<any> = useDispatch()
-    //functions 
-    //login function 
-    const userLogin = () => {
-        // console.log('login');
 
-        // console.log('isLogin', isLogin);
-        // console.log('processing', processing);
-        dispatch(login({email: 'fvthakor' , password: '123456'}))
+    const initialValues = {
+        email: '',
+        password: ''
     }
 
+    const onSubmit = (values:LoginModel) => {
+        dispatch(login(values))
+    }
+
+    const SignupSchema = Yup.object().shape({
+        email: Yup.string()
+                .required('The email address is Required'),
+        password: Yup.string()
+          .required('The password is required'),
+    });
 
     useEffect(() => {
+        console.log('isLogin',isLogin);
         if(isLogin){
             router.push('/dashboard');
         }
@@ -41,18 +51,29 @@ const Login = () => {
                     <div className="mt-4 bg-white shadow-md rounded-lg text-left">
                         <div className="h-2 bg-indigo-700 rounded-t-md"></div>
                         <div className="px-8 py-6 ">
+                            <Formik initialValues={initialValues} validationSchema={SignupSchema} onSubmit={onSubmit} >
+                                {({ errors, touched }) => (
+                                    <Form>
+                                        <RTInput formik={true} name="email" label="Email" type={'text'}  placeholder="Email"/>
+                                        {errors.email && touched.email ? (
+                                                <ValidateError error={errors.email} />
+                                        ) : null}
 
-                            <RTInput label="Email" type={'text'}  placeholder="Email"/>
+                                        <RTInput formik={true} name="password" label="Password" type={'password'}  placeholder="Password"/>
+                                        {errors.password && touched.password ? (
+                                                <ValidateError error={errors.password} />
+                                        ) : null}
 
-                            <RTInput label="Password" type={'password'}  placeholder="Password"/>
-
-                            <div className="flex justify-between items-baseline">
-                                <RTButton name="Login" type={'submit'} className="mt-4 bg-indigo-700 hover:bg-indigo-900" onClick={() => userLogin()} processing={processing} />
-                                <a href="#" className="text-sm hover:underline">Forgot password?</a>
-                            </div>
+                                        <div className="flex justify-between items-baseline">
+                                            <RTButton name="Login" type={'submit'} className="mt-4 bg-indigo-700 hover:bg-indigo-900" processing={processing} />
+                                            <a href="#" className="text-sm hover:underline">Forgot password?</a>
+                                        </div>
+                                    </Form>
+                                )}
+                            </Formik>
                         </div>
-                        <div>
-                            Don't have an account yet? <Link href="/register">Register Now</Link>.
+                        <div className="px-8 pb-4">
+                            Don't have an account yet? <Link className="text-indigo-600 font-bold" href="/register">Register Now</Link>
                         </div>
                     </div>
                 </div>

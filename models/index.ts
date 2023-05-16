@@ -5,3 +5,6 @@ export * from './IconModel'
 export * from './state/AuthState'
 export * from './LoginModel'
 export * from './UserModel'
+export * from './SignUpModel'
+
+export * from './state/UserState'

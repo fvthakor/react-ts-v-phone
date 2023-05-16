@@ -6,4 +6,5 @@ export interface AuthState {
     authUser: UserModel | null;
     authError: string | null;
     processing: boolean; 
+    signUpStatus: boolean;
 }
