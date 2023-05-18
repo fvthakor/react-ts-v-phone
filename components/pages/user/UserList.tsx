@@ -4,7 +4,7 @@ import ViewIcon from "@/components/icons/ViewIcon";
 import RTPagination from "@/components/shared/pagination/RTPagination";
 import { RootStateModel } from "@/models";
 import { getUsers } from "@/store/user/user.action";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { Dispatch } from "redux";
@@ -12,11 +12,20 @@ import { Dispatch } from "redux";
 const UserList = () => {
     const { users } = useSelector((state:RootStateModel) => state.user)
     const dispatch:Dispatch<any> = useDispatch()
-
+    const pageSize = 10;
+    const [currentPage, setCurruntPage] = useState(1);
     useEffect(()=>{
         dispatch(getUsers());
     }, [dispatch])
 
+
+    const getCurruntPage = (page:number) =>{
+        console.log('currunt page', page)
+        setCurruntPage(page);
+    }
+    const testClick = () =>{
+        console.log('test')
+    }
     return(
         <>
             <table className="min-w-full leading-normal">
@@ -76,7 +85,7 @@ const UserList = () => {
                     </>}
                 </tbody>
             </table>
-            <RTPagination total={users.length} />
+            <RTPagination total={150} pageSize={pageSize} curruntPage={currentPage} getCurrentPage={getCurruntPage} />
         </>
     )
 }
