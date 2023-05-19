@@ -1,9 +1,9 @@
-import RTButton from "@/components/shared/button/RTButton"
-import RTInput from "@/components/shared/input/RTInput"
+
 import { setNotification } from "@/store/config/config.action"
 import { Dialog, Transition } from "@headlessui/react"
 import { Fragment, useState } from "react"
 import { useDispatch } from "react-redux"
+import { RTButton, RTInput } from "react-tailwindcss-ts"
 import { Dispatch } from "redux"
 export interface AddCompanyInterface{
     isOpen:boolean,
@@ -55,7 +55,7 @@ const AddCompany = ({isOpen, closeModal}:AddCompanyInterface) => {
                         Add Company
                     </Dialog.Title>
                     <div className="mt-2">
-                        <RTInput label="Company" placeholder="Company" />
+                        <RTInput label="Company" placeholder="Company" name={"company"} />
                     </div>
 
                     <div className="mt-4">

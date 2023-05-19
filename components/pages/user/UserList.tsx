@@ -2,25 +2,37 @@ import DeleteIcon from "@/components/icons/DeleteIcon";
 import EditIcon from "@/components/icons/EditIcon";
 import ViewIcon from "@/components/icons/ViewIcon";
 import RTPagination from "@/components/shared/pagination/RTPagination";
-import { RootStateModel } from "@/models";
+import { RootStateModel, UserModel } from "@/models";
 import { getUsers } from "@/store/user/user.action";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import { JustForTest } from "react-tailwindcss-ts";
 import { Dispatch } from "redux";
 
 const UserList = () => {
     const { users } = useSelector((state:RootStateModel) => state.user)
     const dispatch:Dispatch<any> = useDispatch()
-    const pageSize = 10;
+    const pageSize = 2;
     const [currentPage, setCurruntPage] = useState(1);
+    const [showUser, setShowUser] = useState<UserModel[]>([])
     useEffect(()=>{
         dispatch(getUsers());
     }, [dispatch])
 
+    const fnSetShowUser = () => {
+        const showUsers =  users.slice((currentPage - 1) * pageSize, currentPage * pageSize);
+        setShowUser(showUsers);
+    }
+    useEffect(() => {
+        fnSetShowUser();
+    }, [users])
+
+    useEffect(() => {
+        fnSetShowUser();
+    }, [currentPage])
 
     const getCurruntPage = (page:number) =>{
-        console.log('currunt page', page)
         setCurruntPage(page);
     }
     const testClick = () =>{
@@ -52,7 +64,7 @@ const UserList = () => {
                 <tbody>
                     {users.length > 0 ? <>
 
-                        {users.map(user => (
+                        {showUser.map(user => (
                             <tr>
                                 <td className="py-3 px-6 border-b border-gray-200 bg-white text-sm text-left">
                                     {user.name}
@@ -85,7 +97,7 @@ const UserList = () => {
                     </>}
                 </tbody>
             </table>
-            <RTPagination total={150} pageSize={pageSize} curruntPage={currentPage} getCurrentPage={getCurruntPage} />
+            <RTPagination total={users.length} pageSize={pageSize} curruntPage={currentPage} getCurrentPage={getCurruntPage} />
         </>
     )
 }

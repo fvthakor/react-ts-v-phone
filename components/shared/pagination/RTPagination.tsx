@@ -1,17 +1,18 @@
-import { RTPaginationModel } from "@/models/components";
+// import { RTPaginationModel } from "@/models/components";
 import { useEffect, useState } from "react";
-import { number } from "yup";
-
-const RTPagination = ({total, pageSize, curruntPage, getCurrentPage = () => {}}:RTPaginationModel) => {
-    //const pageArray = [1,2,3,4];
+type Props = {
+    total: number;
+    pageSize:number;
+    curruntPage:number;
+    getCurrentPage?:Function
+}
+const RTPagination = ({total, pageSize, curruntPage, getCurrentPage = () => {}}:Props) => {
     const [arrPage, setArrPage] = useState([0])
     const [nextPageStatus, setNextPageStatus] = useState(false);
     const [prevPageStatus, setPrevPageStatus] = useState(false);
     useEffect(() => {
 
         const page = Math.ceil(total/pageSize);
-        console.log('total page',page);
-        console.log('pageSize', pageSize);
         const pageArray = []
         let addDot1 = false;
         let addDot2 = false
@@ -61,9 +62,9 @@ const RTPagination = ({total, pageSize, curruntPage, getCurrentPage = () => {}}:
                 <div>
                 <p className="text-sm text-gray-700">
                     Showing
-                    <span className="font-medium">1</span>
+                    <span className="font-medium">{(curruntPage * pageSize) - pageSize + 1 }</span>
                     to
-                    <span className="font-medium">10</span>
+                    <span className="font-medium">{curruntPage + pageSize}</span>
                     of
                     <span className="font-medium">{total}</span>
                     results

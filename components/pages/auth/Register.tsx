@@ -1,6 +1,4 @@
 import ValidateError from "@/components/shared/ValidateError";
-import RTButton from "@/components/shared/button/RTButton";
-import RTInput from "@/components/shared/input/RTInput";
 import { RootStateModel, SignUpModel } from "@/models";
 import { register, updateProccesingStatus } from "@/store/auth/auth.action";
 import { SET_SIGNUP_STATUS } from "@/store/auth/auth.type";
@@ -10,6 +8,7 @@ import { NextRouter, useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import { RTButton, RTInput } from "react-tailwindcss-ts";
 import { Dispatch } from "redux";
 import * as Yup from 'yup';
 const Register = () => {

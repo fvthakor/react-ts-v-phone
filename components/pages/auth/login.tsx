@@ -1,6 +1,4 @@
 import ValidateError from "@/components/shared/ValidateError";
-import RTButton from "@/components/shared/button/RTButton";
-import RTInput from "@/components/shared/input/RTInput";
 import { LoginModel, RootStateModel } from "@/models";
 import { login } from "@/store/auth/auth.action";
 import { Form, Formik } from "formik";
@@ -9,6 +7,7 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import { RTButton, RTInput } from "react-tailwindcss-ts";
 import { Dispatch } from "redux";
 import * as Yup from 'yup';
 
