@@ -8,3 +8,4 @@ export * from './UserModel'
 export * from './SignUpModel'
 
 export * from './state/UserState'
+export * from './SettingModel'

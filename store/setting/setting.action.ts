@@ -1,6 +1,6 @@
 import { LoginModel, SignUpModel } from "@/models";
 import { Dispatch } from "redux";
-import { SET_LOGIN, SET_LOGIN_USER, SET_PROCCESING, SET_SIGNUP_STATUS } from "./auth.type";
+import { SET_LOGIN, SET_LOGIN_USER, SET_PROCCESING, SET_SIGNUP_STATUS } from "./setting.type";
 import { setNotification } from "../config/config.action";
 import axios from "axios";
 

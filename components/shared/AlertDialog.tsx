@@ -1,6 +1,6 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
-import { RTButton } from "react-tailwindcss-ts";
+import RTButton from "./RTButton";
 export interface AlertDialogInterface{
     isOpen: boolean;
     processing: boolean;

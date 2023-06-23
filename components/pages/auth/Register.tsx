@@ -1,3 +1,4 @@
+import { RTButton, RTInput } from "@/components/shared";
 import ValidateError from "@/components/shared/ValidateError";
 import { RootStateModel, SignUpModel } from "@/models";
 import { register, updateProccesingStatus } from "@/store/auth/auth.action";
@@ -8,7 +9,6 @@ import { NextRouter, useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { RTButton, RTInput } from "react-tailwindcss-ts";
 import { Dispatch } from "redux";
 import * as Yup from 'yup';
 const Register = () => {
@@ -68,25 +68,25 @@ const Register = () => {
                         <Formik initialValues={initialValues} validationSchema={SignupSchema} onSubmit={onSubmit} >
                             {({ errors, touched }) => (
                                 <Form>
-                                    <RTInput formik={true} name="name" label="Name" type={'text'}  placeholder="Name"/>
+                                    <RTInput formik={true} inputName="name" label="Name" type={'text'}  placeholder="Name"/>
                                     {errors.name && touched.name ? (
                                             <ValidateError error={errors.name} />
                                     ) : null}
 
 
-                                    <RTInput formik={true} name="email" label="Email" type={'text'}  placeholder="Email"/>
+                                    <RTInput formik={true} inputName="email" label="Email" type={'text'}  placeholder="Email"/>
                                     {errors.email && touched.email ? (
                                             <ValidateError error={errors.email} />
                                     ) : null}
 
 
-                                    <RTInput formik={true} name="password" label="Password" type={'password'}  placeholder="Password"/>
+                                    <RTInput formik={true} inputName="password" label="Password" type={'password'}  placeholder="Password"/>
                                     {errors.password && touched.password ? (
                                             <ValidateError error={errors.password} />
                                     ) : null}
                                     
 
-                                    <RTInput formik={true} name="confirm_password" label="Confirm Password" type={'password'}  placeholder="Confirm Password"/>
+                                    <RTInput formik={true} inputName="confirm_password" label="Confirm Password" type={'password'}  placeholder="Confirm Password"/>
                                     {errors.confirm_password && touched.confirm_password ? (
                                             <ValidateError error={errors.confirm_password} />
                                     ) : null}

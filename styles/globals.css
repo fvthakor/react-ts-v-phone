@@ -1,5 +1,5 @@
 @import 'react-toastify/dist/ReactToastify.css';
-
+/* @import 'react-tailwindcss-ts/dist/index.css'; */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

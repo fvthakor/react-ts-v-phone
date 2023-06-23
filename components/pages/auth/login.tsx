@@ -1,3 +1,4 @@
+import { RTButton, RTInput } from "@/components/shared";
 import ValidateError from "@/components/shared/ValidateError";
 import { LoginModel, RootStateModel } from "@/models";
 import { login } from "@/store/auth/auth.action";
@@ -7,7 +8,6 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { RTButton, RTInput } from "react-tailwindcss-ts";
 import { Dispatch } from "redux";
 import * as Yup from 'yup';
 
@@ -53,12 +53,12 @@ const Login = () => {
                             <Formik initialValues={initialValues} validationSchema={SignupSchema} onSubmit={onSubmit} >
                                 {({ errors, touched }) => (
                                     <Form>
-                                        <RTInput formik={true} name="email" label="Email" type={'text'}  placeholder="Email"/>
+                                        <RTInput formik={true} inputName="email" label="Email" type={'text'}  placeholder="Email"/>
                                         {errors.email && touched.email ? (
                                                 <ValidateError error={errors.email} />
                                         ) : null}
 
-                                        <RTInput formik={true} name="password" label="Password" type={'password'}  placeholder="Password"/>
+                                        <RTInput formik={true} inputName="password" label="Password" type={'password'}  placeholder="Password"/>
                                         {errors.password && touched.password ? (
                                                 <ValidateError error={errors.password} />
                                         ) : null}

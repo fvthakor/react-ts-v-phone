@@ -44,7 +44,7 @@ function Sidebar(props:SidebarInterFace){
                 </div>
                 <Profile />
             </nav>
-           <Company />
+           {/* <Company /> */}
         </>
     );
 }

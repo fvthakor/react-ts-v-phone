@@ -7,7 +7,6 @@ import { getUsers } from "@/store/user/user.action";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { JustForTest } from "react-tailwindcss-ts";
 import { Dispatch } from "redux";
 
 const UserList = () => {
