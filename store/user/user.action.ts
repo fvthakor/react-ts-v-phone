@@ -21,8 +21,8 @@ export const getUsers = () => async (dispatch:Dispatch<any>)=> {
             });
         }
     }catch(error:any){
-        dispatch(setNotification(
-            {type: 'error' , message:  error.response.data.message}
-        ))
+        // dispatch(setNotification(
+        //     {type: 'error' , message:  error.response.data.message}
+        // ))
     }
 }

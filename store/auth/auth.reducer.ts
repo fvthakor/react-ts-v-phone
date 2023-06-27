@@ -1,5 +1,5 @@
 import { ActionModel, AuthState } from "@/models";
-import { SET_LOGIN, SET_LOGIN_USER, SET_PROCCESING, SET_SIGNUP_STATUS } from "./auth.type";
+import { SET_AUTH_TOKEN, SET_LOGIN, SET_LOGIN_USER, SET_PROCCESING, SET_SIGNUP_STATUS } from "./auth.type";
 
 const initialState: AuthState = {
     isLogin: false,
@@ -31,6 +31,11 @@ const AuthReducer = (state = initialState, action:ActionModel):AuthState => {
           ...state,
           signUpStatus: action.payload
         }
+      case SET_AUTH_TOKEN:
+          return{
+            ...state,
+            authToken: action.payload
+      }
       default:
         return state;
     }

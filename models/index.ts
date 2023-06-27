@@ -9,3 +9,5 @@ export * from './SignUpModel'
 
 export * from './state/UserState'
 export * from './SettingModel'
+export * from './state/SettingState'
+export * from './NumberModel'

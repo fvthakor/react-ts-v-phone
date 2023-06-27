@@ -1,39 +1,26 @@
 import { ActionModel, AuthState } from "@/models";
-import { SET_LOGIN, SET_LOGIN_USER, SET_PROCCESING, SET_SIGNUP_STATUS } from "./setting.type";
+import { ADD_SETTING, SET_PROCCESING } from "./setting.type";
+import { SettingState } from "@/models/state/SettingState";
 
-const initialState: AuthState = {
-    isLogin: false,
-    authToken: '',
-    authUser: null,
-    authError: null,
+const initialState: SettingState = {
     processing: false,
-    signUpStatus: false
 };
-const AuthReducer = (state = initialState, action:ActionModel):AuthState => {
+const SettingReducer = (state = initialState, action:ActionModel):SettingState => {
     switch (action.type) {
-      case SET_LOGIN:
+      case ADD_SETTING:
           return{
             ...state,
-            isLogin: action.payload
+            setting: action.payload
           }
-      case SET_LOGIN_USER: 
-          return{
-            ...state,
-            authUser: action.payload
-          }
+      
       case SET_PROCCESING: 
           return{
             ...state,
             processing: action.payload
           }
-      case SET_SIGNUP_STATUS:
-        return{
-          ...state,
-          signUpStatus: action.payload
-        }
       default:
         return state;
     }
   };
   
-  export default AuthReducer;
+  export default SettingReducer;

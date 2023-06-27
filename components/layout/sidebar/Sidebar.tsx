@@ -1,5 +1,5 @@
 
-import { UserIcon, UsersIcon } from "@heroicons/react/20/solid";
+import { HashtagIcon, UserIcon, UsersIcon } from "@heroicons/react/20/solid";
 import MenuIcon from "../../icons/MenuIcon";
 import MessageIcon from "../../icons/MessageIcon";
 import NotificationIcon from "../../icons/NotificationIcon";
@@ -11,6 +11,7 @@ import { useSelector } from "react-redux";
 import { RootStateModel, UserModel } from "@/models";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
+import PhoneIcon from "@/components/icons/NumberIcon";
 export interface SidebarInterFace{
   onClick?: any
 }
@@ -55,6 +56,7 @@ function getSuperAdminMenu(role:string): Array<any>{
   if(role === 'superadmin'){
     return [
       {route: '/dashboard', title: 'Toggle sidebar', tabName: 'linkTab', content: <MenuIcon className="w-6 h-6" />},
+      {route: '/dashboard', title: 'Phone Number', tabName: 'linkTab', content: <PhoneIcon className="w-6 h-6" />},
       {route: '/user', title: 'Toggle notifications panel', tabName: 'userTab', content: <UsersIcon className="w-6 h-6" />},
       {route: '/chat', title: 'Toggle message panel', tabName: 'messageTab', content: <MessageIcon className="w-6 h-6" />},
       {route: '/notification', title: 'Toggle notifications panel', tabName: 'notificationTab', content: <NotificationIcon className="w-6 h-6" />},
@@ -62,6 +64,7 @@ function getSuperAdminMenu(role:string): Array<any>{
   }else if(role === 'admin'){
     return [
       {route: '/dashboard', title: 'Toggle sidebar', tabName: 'linkTab', content: <MenuIcon className="w-6 h-6" />},
+      {route: '/number', title: 'Phone Number', tabName: 'linkTab', content: <HashtagIcon className="w-6 h-6" />},
       {route: '/chat', title: 'Toggle message panel', tabName: 'messageTab', content: <MessageIcon className="w-6 h-6" />},
       {route: '/notification', title: 'Toggle notifications panel', tabName: 'notificationTab', content: <NotificationIcon className="w-6 h-6" />},
     ]

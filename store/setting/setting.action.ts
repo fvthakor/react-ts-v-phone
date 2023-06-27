@@ -1,27 +1,25 @@
-import { LoginModel, SignUpModel } from "@/models";
+import { LoginModel, SettingModel } from "@/models";
 import { Dispatch } from "redux";
-import { SET_LOGIN, SET_LOGIN_USER, SET_PROCCESING, SET_SIGNUP_STATUS } from "./setting.type";
+import { ADD_SETTING, SET_PROCCESING } from "./setting.type";
 import { setNotification } from "../config/config.action";
 import axios from "axios";
+import store from "..";
 
-export const login = (data:LoginModel) => async (dispatch:Dispatch<any>)=> {
+export const addUpdateSetting = (data:SettingModel) => async (dispatch:Dispatch<any>)=> {
     dispatch({
         type: SET_PROCCESING,
         payload: true
     });
     try{
-        const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`, data)
+        const {authUser} = store.getState().auth
+        const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/setting`, data, { headers: {"Authorization" : `${authUser?.token}`}})
         if(res.status == 200 || res.status == 201){
             dispatch({
-                type: SET_LOGIN,
-                payload: true,
-            });
-            dispatch({
-                type: SET_LOGIN_USER,
+                type: ADD_SETTING,
                 payload: res.data.data
             })
             dispatch(setNotification(
-                {type: 'success' , message: 'Login sucessfull!'}
+                {type: 'success' , message: 'Setting added sucessfully!'}
             ))
         }
         dispatch({
@@ -30,7 +28,7 @@ export const login = (data:LoginModel) => async (dispatch:Dispatch<any>)=> {
         });
     }catch(error){
         dispatch(setNotification(
-            {type: 'error' , message: 'Email or password is wrong!'}
+            {type: 'error' , message: 'Setting not saved!'}
         ))
         dispatch({
             type: SET_PROCCESING,
@@ -39,64 +37,26 @@ export const login = (data:LoginModel) => async (dispatch:Dispatch<any>)=> {
     }
 }
 
-export const register = (data:SignUpModel) => async (dispatch:Dispatch<any>) => {
-    dispatch({
-        type: SET_PROCCESING,
-        payload: true
-    });
+export const getSetting = () => async (dispatch:Dispatch<any>)=> {
     try{
-        const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth/register`, {...data, role: 'admin'})
-        if(res.status == 200){
-            dispatch(setNotification(
-                {type: 'success' , message: 'Your account registered successfully!'}
-            ))
-            dispatch({
-                type: SET_SIGNUP_STATUS,
-                payload: true
-            });
-            dispatch({
-                type: SET_PROCCESING,
-                payload: false
-            })
-            setTimeout(()=>{
-                dispatch({type: SET_SIGNUP_STATUS, payload: false})
-            }, 1000)
+        const {authUser} = store.getState().auth
+        const {setting} = store.getState().setting
+        if(!setting){
+            const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/setting/by-user`, { headers: {"Authorization" : `${authUser?.token}`}})
+            if(res.status == 200){
+                dispatch({
+                    type: ADD_SETTING,
+                    payload: res.data.data
+                })
+            }
         }
-    }catch(error:any){
-        if(error?.response?.status === 400){
-            dispatch(setNotification(
-                {type: 'error' , message: error.response.data.message}
-            ))
-        }else{
-            dispatch(setNotification(
-                {type: 'error' , message: 'Your account not registered! please try again'}
-            ))
-        }
-        
-        dispatch({
-            type: SET_PROCCESING,
-            payload: false
-        })
-    }
-}
-
-export const logout = () => async (dispatch:Dispatch<any>)=> {
-    try{
-        await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/auth/logout`, {
-            withCredentials: true,
-        })
     }catch(error){
-
+        dispatch(setNotification(
+            {type: 'error' , message: 'Setting not get!'}
+        ))
     }
-    dispatch({
-        type: SET_LOGIN_USER,
-        payload: null
-    })
-    dispatch({
-        type: SET_LOGIN,
-        payload: false
-    })
 }
+
 
 export const updateProccesingStatus = (status:boolean) => async (dispatch:Dispatch<any>) => {
     dispatch({

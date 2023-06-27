@@ -1,6 +1,6 @@
 import { LoginModel, SignUpModel } from "@/models";
 import { Dispatch } from "redux";
-import { SET_LOGIN, SET_LOGIN_USER, SET_PROCCESING, SET_SIGNUP_STATUS } from "./auth.type";
+import { SET_AUTH_TOKEN, SET_LOGIN, SET_LOGIN_USER, SET_PROCCESING, SET_SIGNUP_STATUS } from "./auth.type";
 import { setNotification } from "../config/config.action";
 import axios from "axios";
 
@@ -19,6 +19,11 @@ export const login = (data:LoginModel) => async (dispatch:Dispatch<any>)=> {
             dispatch({
                 type: SET_LOGIN_USER,
                 payload: res.data.data
+            })
+
+            dispatch({
+                type: SET_AUTH_TOKEN,
+                payload: res.data.data.token
             })
             dispatch(setNotification(
                 {type: 'success' , message: 'Login sucessfull!'}

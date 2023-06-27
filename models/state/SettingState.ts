@@ -1,5 +1,6 @@
 import { SettingModel } from "../SettingModel";
 
 export interface SettingState {
-    setting?:SettingModel
+    setting?:SettingModel,
+    processing: boolean
 }

@@ -1,4 +1,2 @@
-export const SET_LOGIN = 'SET_LOGIN';
-export const SET_LOGIN_USER = 'SET_LOGIN_USER'
+export const ADD_SETTING = 'ADD_SETTING';
 export const SET_PROCCESING = "SET_PROCCESING"
-export const SET_SIGNUP_STATUS = "SET_SIGNUP_STATUS"

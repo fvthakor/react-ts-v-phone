@@ -4,4 +4,5 @@ export interface UserModel {
     _id?:string;
     role?:string;
     createdAt?:Date;
+    token?:string;
 }
