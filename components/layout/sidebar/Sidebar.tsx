@@ -12,6 +12,7 @@ import { RootStateModel, UserModel } from "@/models";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import PhoneIcon from "@/components/icons/NumberIcon";
+import SocketConnection from "./SocketConnection";
 export interface SidebarInterFace{
   onClick?: any
 }
@@ -33,6 +34,7 @@ function Sidebar(props:SidebarInterFace){
     //const menus = 
     return(
         <>
+        <SocketConnection />
             <nav
               aria-label="Options"
               className="place-content-between sm:flex-col items-center sm:flex-shrink-0 sm:w-16 w-full sm:h-screen py-4 bg-white border-r-2 border-indigo-100 shadow-md sm:flex flex gap-4 fixed sm:sticky z-[51]">

@@ -11,7 +11,7 @@ const Number = () => {
         }, 1000)
     }
     return(
-        <div className="h-screen p-2">
+        <div className="h-screen p-2 flex flex-col">
             <div className="flex justify-between">
                 <div>
                 <h1 className="">Number</h1>
@@ -21,8 +21,8 @@ const Number = () => {
                 </div>
             </div>
             
-            <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
-                <div className="inline-block min-w-full shadow rounded-lg overflow-hidden">
+            <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 grow overflow-y-auto">
+                <div className="inline-block min-w-full shadow rounded-lg">
                     <NumberList openModelStatus={openModelStatus}  />
                 </div>
             </div>

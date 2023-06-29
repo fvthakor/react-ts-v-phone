@@ -9,22 +9,26 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { Dispatch } from "redux";
 import PurchaseNumber from "./PurchaseNumber";
+import { deleteNumber, getNumbers } from "@/store/number/number.action";
+import ConfirmButton from "@/components/shared/ConfirmButton";
+import { TrashIcon } from "@heroicons/react/20/solid";
 type NumberListProps = {
     openModelStatus: boolean
 }
 const NumberList = (data: NumberListProps) => {
-    const { numbers } = useSelector((state:RootStateModel) => state.number)
+    const { numbers ,processing } = useSelector((state:RootStateModel) => state.number)
     const dispatch:Dispatch<any> = useDispatch()
-    const pageSize = 2;
+    const pageSize = 10;
     const [currentPage, setCurruntPage] = useState(1);
-    const [showUser, setShowUser] = useState<Number[]>([])
+    const [showNumbers, setShowNumbers] = useState<Number[]>([])
+    const [isOpenDelete, setIsOpenDelete] = useState(false)
     useEffect(()=>{
-        dispatch(getUsers());
+        dispatch(getNumbers());
     }, [dispatch])
 
     const fnSetShowUser = () => {
-        const showUsers =  numbers.slice((currentPage - 1) * pageSize, currentPage * pageSize);
-        setShowUser(showUsers);
+        const showNumbers =  numbers.slice((currentPage - 1) * pageSize, currentPage * pageSize);
+        setShowNumbers(showNumbers);
     }
     useEffect(() => {
         fnSetShowUser();
@@ -56,9 +60,27 @@ const NumberList = (data: NumberListProps) => {
     const openModal = () => {
         setIsOpen(true)
     }
+
+    const deleteData = (number:Number) => {
+        //console.log(number);
+        setIsOpenDelete(true);
+    }
+
+    const closeAlertModel = (status:boolean, id:string) => {
+        if(status){
+            dispatch(deleteNumber(id));
+        }else{
+            setIsOpenDelete(false);
+        }
+    }
+    useEffect(() => {
+        if(!processing){
+            setIsOpenDelete(false);
+        }
+    }, [processing])
     return(
         <>
-            <table className="min-w-full leading-normal">
+            <table className="min-w-full leading-normal h-max overflow-y-auto">
                 <thead>
                     <tr>
                         <th
@@ -69,10 +91,6 @@ const NumberList = (data: NumberListProps) => {
                             className="px-5 py-3 border-b-2 border-gray-300 bg-gray-200 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider">
                             SID
                         </th>
-                        {/* <th
-                            className="px-5 py-3 border-b-2 border-gray-300 bg-gray-200 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                            Status
-                        </th> */}
                         <th
                             className="px-5 py-3 border-b-2 border-gray-300 bg-gray-200 text-xs font-semibold text-gray-600 uppercase tracking-wider text-center">
                             Action
@@ -82,28 +100,31 @@ const NumberList = (data: NumberListProps) => {
                 <tbody>
                     {numbers.length > 0 ? <>
 
-                        {showUser.map(user => (
+                        {showNumbers.map(number => (
                             <tr>
                                 <td className="py-3 px-6 border-b border-gray-200 bg-white text-sm text-left">
-                                    {user.number}
+                                    {number.number}
                                 </td>
                                 <td className="py-3 px-6 border-b border-gray-200 bg-white text-sm text-center">
-                                    {user.sid}
+                                    {number.sid}
                                 </td>
                                 {/* <td className="py-3 px-6  border-b border-gray-200 bg-white text-sm text-center">
                                     fsfs
                                 </td> */}
                                 <td className="py-3 px-6 border-b border-gray-200 bg-white text-sm text-center">
                                     <div className="flex item-center justify-center">
-                                        <div className="w-4 mr-2 transform hover:text-indigo-500 hover:scale-110">
+                                        {/* <div className="w-4 mr-2 transform hover:text-indigo-500 hover:scale-110">
                                             <ViewIcon className="w-4 h-4 cursor-pointer" />
                                         </div>
                                         <div className="w-4 mr-2 transform hover:text-indigo-500 hover:scale-110">
                                             <EditIcon className="w-4 h-4 cursor-pointer" />
-                                        </div>
-                                        <div className="w-4 mr-2 transform hover:text-indigo-500 hover:scale-110">
+                                        </div> */}
+                                        {/* <div className="w-4 mr-2 transform hover:text-indigo-500 hover:scale-110" onClick={() => deleteData(number)}>
                                             <DeleteIcon className="w-4 h-4 cursor-pointer" />
-                                        </div>
+                                        </div> */}
+                                        <ConfirmButton title='Delete Number!' text='Are you sure want to delete?' isOpen={isOpenDelete} closeModel={closeAlertModel} id={number._id} processing={processing}>
+                                            <span className="flex items-center pl-2 pr-1 text-red-500 cursor-pointer" onClick={() => deleteData(number)} ><TrashIcon className="h-5 w-5" aria-hidden="true"/></span> 
+                                        </ConfirmButton>
                                     </div>
                                 </td>
                             </tr>

@@ -1,3 +1,4 @@
+import { MessageState } from "../MessageModel";
 import { NumberState } from "../NumberModel";
 import { AuthState } from "./AuthState";
 import { ConfigState } from "./ConfigState";
@@ -9,5 +10,6 @@ export interface RootStateModel {
     auth: AuthState,
     user:UserState,
     setting: SettingState,
-    number:NumberState
+    number:NumberState,
+    message: MessageState
 }

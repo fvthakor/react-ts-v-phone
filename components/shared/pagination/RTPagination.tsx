@@ -60,15 +60,15 @@ const RTPagination = ({total, pageSize, curruntPage, getCurrentPage = () => {}}:
             </div>
             <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
                 <div>
-                <p className="text-sm text-gray-700">
-                    Showing
+                {/* <p className="text-sm text-gray-700">
+                    Showing &nbsp;
                     <span className="font-medium">{(curruntPage * pageSize) - pageSize + 1 }</span>
-                    to
-                    <span className="font-medium">{curruntPage + pageSize}</span>
-                    of
+                    &nbsp; to  &nbsp;
+                    <span className="font-medium">{total < curruntPage + pageSize ?  total : curruntPage + pageSize}</span>
+                    &nbsp; of  &nbsp;
                     <span className="font-medium">{total}</span>
-                    results
-                </p>
+                    &nbsp; entries &nbsp;
+                </p> */}
                 </div>
                 <div>
                 <nav className="isolate inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">

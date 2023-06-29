@@ -3,6 +3,7 @@ import { Dispatch } from "redux";
 import { SET_AUTH_TOKEN, SET_LOGIN, SET_LOGIN_USER, SET_PROCCESING, SET_SIGNUP_STATUS } from "./auth.type";
 import { setNotification } from "../config/config.action";
 import axios from "axios";
+import { SET_NUMBERS } from "../number/number.type";
 
 export const login = (data:LoginModel) => async (dispatch:Dispatch<any>)=> {
     dispatch({
@@ -96,6 +97,11 @@ export const logout = () => async (dispatch:Dispatch<any>)=> {
     dispatch({
         type: SET_LOGIN_USER,
         payload: null
+    })
+
+    dispatch({
+        type: SET_NUMBERS,
+        payload: []
     })
     dispatch({
         type: SET_LOGIN,

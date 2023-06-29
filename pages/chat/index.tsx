@@ -5,7 +5,7 @@ const ChatPage = () => {
     return(
         <ChatLayout>
             <div className="w-full h-full p-1">
-                {/* <ChatBody /> */}
+                
             </div>
         </ChatLayout>
     )
