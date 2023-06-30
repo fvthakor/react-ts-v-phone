@@ -9,6 +9,7 @@ import { Dispatch } from "redux";
 
 const MessageInput = () => {
     const dispatch:Dispatch<any> = useDispatch();
+    
     const { activeNumber } = useSelector((state:RootStateModel) => state.message)
 
     const [messageValue, setMessageValue] = useState('');

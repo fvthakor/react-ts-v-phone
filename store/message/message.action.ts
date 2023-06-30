@@ -74,6 +74,34 @@ export const getMessages = (number:string) => async (dispatch:Dispatch<any>) => 
     }
 }
 
+export const forceGetMessages = (number:string) => async (dispatch:Dispatch<any>) => {
+    try{
+        const {authUser} = store.getState().auth
+        const {messageLists, numberList} = store.getState().message
+
+        const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/message/get-messages`,{number:number} ,{ headers: {"Authorization" : `${authUser?.token}`}})
+        if(res.status == 200){
+            const data:Message[] = res.data.data
+            dispatch({
+                type: SET_MESSAGES,
+                payload: data,
+            });
+            const newMessageLists = messageLists
+            newMessageLists[`${number}`] = data;
+
+            dispatch({
+                type: SET_MESSAGE_LIST,
+                payload: newMessageLists,
+            });
+        }
+        
+    }catch(error:any){
+        dispatch(setNotification(
+            {type: 'error' , message:  error.response.data.message}
+        ))
+    }
+}
+
 export const sendMessage = (message:Message) => async (dispatch:Dispatch<any>) => {
     try{
         const {authUser} = store.getState().auth
@@ -105,6 +133,50 @@ export const sendMessage = (message:Message) => async (dispatch:Dispatch<any>) =
         ))
     }
 }
+
+export const reciveMessage = (message:Message) => async (dispatch:Dispatch<any>) => {
+    try{
+        const {authUser} = store.getState().auth
+
+        const {activeNumber,messageLists, numberList, messages} = store.getState().message
+        
+        const filterNumber = numberList.filter(item => item._id === message.number)
+        //console.log('filterNumber',filterNumber)
+        if(filterNumber.length > 0){
+            let newMessageLists = messageLists
+            if(newMessageLists[`${message.number}`]){
+                newMessageLists[`${message.number}`] = [...newMessageLists[`${message.number}`], message]
+            }
+            dispatch({
+                type: SET_MESSAGE_LIST,
+                payload: newMessageLists,
+            });
+            if(activeNumber?._id === message.number){
+                dispatch({
+                    type: SET_MESSAGES,
+                    payload: [...messages, message],
+                }); 
+                //read-messages
+                await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/message/read-messages`,{number: message.number} ,{ headers: {"Authorization" : `${authUser?.token}`}})
+            }
+            const newNumberList = numberList.filter(item => item._id != message.number)
+            dispatch({
+                type: SET_NUMBER_LIST,
+                payload:[ {...filterNumber[0], isview: filterNumber[0].isview + 1, message: message.message },...newNumberList],
+            }); 
+
+        }else{
+                dispatch({
+                type: SET_NUMBER_LIST,
+                payload: [{...message,_id: message.number, id: message._id, isview: 1}, ...numberList],
+            }); 
+        }
+    }catch(error:any){
+        console.error(error);
+       console.log('error while recived message', error.message);
+    }
+}
+
 
 
 
