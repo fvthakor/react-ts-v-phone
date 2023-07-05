@@ -1,5 +1,5 @@
 import { ActionModel, ConfigState } from '@/models';
-import { SET_ACTIVE_MENU, SET_ERROR_MESSAGE, SET_MODE, SET_SUBMENU_STATUS, SET_SUCCESS_MESSAGE } from './config.type';
+import { SET_ACTIVE_MENU, SET_ERROR_MESSAGE, SET_MODE, SET_RIGHT_SIDEBAR, SET_SUBMENU_STATUS, SET_SUCCESS_MESSAGE } from './config.type';
 
 const initialState: ConfigState = {
     darkMode: false,
@@ -7,6 +7,7 @@ const initialState: ConfigState = {
     subMenuOpen: false,
     errorMessage: null,
     successMessage: null,
+    rightSidebar: false
 };
 
 const ConfigReducer = (state = initialState, action:ActionModel):ConfigState => {
@@ -16,6 +17,11 @@ const ConfigReducer = (state = initialState, action:ActionModel):ConfigState => 
         ...state,
         darkMode: action.payload,
       };
+    case SET_RIGHT_SIDEBAR:
+        return {
+          ...state,
+          rightSidebar: action.payload,
+        };
     case SET_ACTIVE_MENU:
         return {
           ...state,

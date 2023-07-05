@@ -1,5 +1,5 @@
 import { Dispatch } from "redux";
-import { SET_ACTIVE_MENU, SET_ERROR_MESSAGE, SET_MODE, SET_SUBMENU_STATUS, SET_SUCCESS_MESSAGE } from "./config.type";
+import { SET_ACTIVE_MENU, SET_ERROR_MESSAGE, SET_MODE, SET_RIGHT_SIDEBAR, SET_SUBMENU_STATUS, SET_SUCCESS_MESSAGE } from "./config.type";
 import { NotifyModel } from "@/models/NotifyModel";
 
 export const setThemeMode = (mode:boolean) => async (dispatch:Dispatch<any>)=> {
@@ -54,4 +54,12 @@ export const setNotification = (data:NotifyModel) => async (dispatch:Dispatch<an
             });
         });
     }
+}
+
+export const setRightSideSidebar = (status:boolean) => async (dispatch: Dispatch<any>) => {
+    console.log('status', status)
+    dispatch({
+        type: SET_RIGHT_SIDEBAR,
+        payload: status,
+    });
 }

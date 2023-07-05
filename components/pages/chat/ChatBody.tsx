@@ -4,6 +4,7 @@ import ChatHeader from "./ChatHeader";
 import MessageInput from "./MessageInput";
 import { RootStateModel } from "@/models";
 import { useEffect, useRef } from "react";
+import { useRouter } from "next/router";
 
 const ChatBody = () => {
 
@@ -18,7 +19,27 @@ const ChatBody = () => {
           });
         
       }, [messages])
-      
+
+    const router = useRouter()
+    const {id} = router.query
+
+    useEffect(() => {
+        if (messageEl) 
+        messageEl.current.addEventListener('DOMNodeInserted', (event:any) => {
+        const { currentTarget: target } = event;
+        target.scroll({ top: target.scrollHeight, behavior: 'smooth' });
+        });
+    }, []);
+    useEffect(()=>{
+        setTimeout(() => {
+            if (messageEl) 
+            messageEl.current.addEventListener('DOMNodeInserted', (event:any) => {
+              const { currentTarget: target } = event;
+              target.scroll({ top: target.scrollHeight, behavior: 'smooth' });
+            });
+        },1000)
+       
+      }, [messages, id])
     return(
         <div className="flex flex-col w-full h-[calc(100vh+6rem)] sm:h-screen bg-slate-100  mt-24 sm:mt-0 ">
             <ChatHeader />

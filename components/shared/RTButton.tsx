@@ -1,13 +1,15 @@
+import { HtmlProps } from 'next/dist/shared/lib/html-context'
 import { LoadderIcon } from '../icons/LoadderIcon'
 import React from 'react'
 
 type Props = {
   className?: string
   type?: 'button' | 'submit' | 'reset'
-  name: string
+  name?: string
   buttonType?: 'sm' | 'md' | 'lg'
   onClick?: React.MouseEventHandler<HTMLButtonElement>
   processing?: boolean
+  icon: HtmlProps
 }
 
 const RTButton = (props: Props) => {
@@ -33,7 +35,7 @@ const RTButton = (props: Props) => {
             Processing...
           </div>
         ) : (
-          <>{props.name}</>
+          <> {props.name}</>
         )}
       </button>
     </>

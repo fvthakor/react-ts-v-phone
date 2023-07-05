@@ -4,4 +4,5 @@ export interface ConfigState {
     subMenuOpen:boolean;
     errorMessage?: string | null;
     successMessage?: string | null;
+    rightSidebar: boolean
 }

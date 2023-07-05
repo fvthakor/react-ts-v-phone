@@ -13,6 +13,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/router";
 import PhoneIcon from "@/components/icons/NumberIcon";
 import SocketConnection from "./SocketConnection";
+import RightSidebar from "./RightSidebar";
 export interface SidebarInterFace{
   onClick?: any
 }
@@ -47,6 +48,8 @@ function Sidebar(props:SidebarInterFace){
                 </div>
                 <Profile />
             </nav>
+
+            <RightSidebar />
            {/* <Company /> */}
         </>
     );
