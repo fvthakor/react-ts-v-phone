@@ -19,7 +19,7 @@ const SocketConnection = () => {
     const socketInitializer = async () => {
       if(!connectSocket){
         setConnectSocket(true);
-        socket = io('http://localhost:3001')
+        socket = io(`${process.env.NEXT_PUBLIC_SOCKET_URL}`)
 
         socket.on('connect', () => { 
           console.log('connected');
@@ -30,6 +30,7 @@ const SocketConnection = () => {
         });
 
         socket.on("receiveMessage", (message: Message) => {
+          console.log('message', message);
           dispatch(reciveMessage(message));
         })
         socket.emit('user_connected', authUser?._id);
