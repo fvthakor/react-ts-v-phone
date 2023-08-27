@@ -8,7 +8,8 @@ type Props = {
   onChange?: React.ChangeEventHandler<HTMLInputElement>
   id?: string
   formik?: boolean
-  inputName: string
+  inputName: string,
+  value:any
 }
 
 const RTInput = (props: Props) => {
@@ -36,6 +37,7 @@ const RTInput = (props: Props) => {
             type={props.type ? props.type : 'text'}
             placeholder={props.placeholder ? props.placeholder : ''}
             name={props.inputName}
+            value={props.value}
             className={`border w-full h-5 px-3 py-5 mt-2 hover:outline-none focus:outline-none focus:ring-indigo-500 focus:ring-1 rounded-md ${props.className}`}
           />
         </>
@@ -55,6 +57,7 @@ const RTInput = (props: Props) => {
             placeholder={props.placeholder ? props.placeholder : ''}
             className={`border w-full h-5 px-3 py-5 mt-2 hover:outline-none focus:outline-none focus:ring-indigo-500 focus:ring-1 rounded-md text-black dark:text-white ${props.className}`}
             name={props.inputName}
+            value={props.value}
           />
         </>
       )}

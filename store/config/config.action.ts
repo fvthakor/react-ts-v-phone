@@ -1,5 +1,5 @@
 import { Dispatch } from "redux";
-import { SET_ACTIVE_MENU, SET_ERROR_MESSAGE, SET_MODE, SET_RIGHT_SIDEBAR, SET_SUBMENU_STATUS, SET_SUCCESS_MESSAGE } from "./config.type";
+import { SET_ACTIVE_MENU, SET_DAILER_STATUS, SET_ERROR_MESSAGE, SET_MODE, SET_RIGHT_SIDEBAR, SET_SUBMENU_STATUS, SET_SUCCESS_MESSAGE } from "./config.type";
 import { NotifyModel } from "@/models/NotifyModel";
 
 export const setThemeMode = (mode:boolean) => async (dispatch:Dispatch<any>)=> {
@@ -8,6 +8,15 @@ export const setThemeMode = (mode:boolean) => async (dispatch:Dispatch<any>)=> {
         payload: mode,
     });
 }
+
+export const setDailerStatus = (status:boolean) => async (dispatch:Dispatch<any>)=> {
+    console.log('setDailerStatus', status)
+    dispatch({
+        type: SET_DAILER_STATUS,
+        payload: status,
+    });
+}
+
 
 export const setActiveMenu = (tab:string) => async (dispatch:Dispatch<any>) => {
     dispatch({
