@@ -1,0 +1,5 @@
+export const SET_DEVICE_TOKEN = 'SET_DEVICE_TOKEN';
+// export const SET_LOGIN_USER = 'SET_LOGIN_USER'
+// export const SET_PROCCESING = "SET_PROCCESING"
+// export const SET_SIGNUP_STATUS = "SET_SIGNUP_STATUS"
+// export const SET_AUTH_TOKEN = "SET_AUTH_TOKEN"
